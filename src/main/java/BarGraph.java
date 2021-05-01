@@ -19,10 +19,10 @@ public class BarGraph extends JPanel implements Icon {
     }
 
     private void drawBars(final Graphics g) {
-        int /*i,*/ OUTER_MARGIN = 20,
-                WIDTH = 800 + 2 * OUTER_MARGIN,
-                HEIGHT = 600 + 2 * OUTER_MARGIN;
-        /*SPACE_BETWEEN_BARS = 10, SPACE_ON_TOP_BOTTOM = 25;*/
+        int  OUTER_MARGIN = 20,
+                WIDTH = 500 + 2 * OUTER_MARGIN,
+                HEIGHT = 100 + 2 * OUTER_MARGIN;
+
 
         g.setColor(BACKGROUND_COLOR);
         g.fillRect(0, 0, WIDTH, HEIGHT);
