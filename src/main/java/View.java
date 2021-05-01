@@ -17,12 +17,17 @@ public class View extends JFrame {
     JButton updateNameButton;
     JButton resetButton;
     BarGraph newGraph;
+    JLabel label;
+    JLabel label2;
+    JLabel label3;
+    JLabel printer;
 
     JLabel studentNameLabel;
     JLabel allClassesLabel;
 
     public View(BlockingQueue<Message> queue, String name, ArrayList<Integer> classes, BarGraph graph) {
         this.queue = queue;
+
 
         textField = new JTextField("0");
         textField2 = new JTextField("0");
@@ -35,10 +40,10 @@ public class View extends JFrame {
         newGraph.setVisible(true);
         resetButton = new JButton("reset");
         newGraph.add(resetButton);
-        newGraph.add(textField);
         newGraph.add(new JLabel("green"));
         newGraph.add(new JLabel("blue"));
         newGraph.add(new JLabel("red"));
+        newGraph.add(textField);
         newGraph.add(textField2);
         newGraph.add(textField3);
         newGraph.paintImmediately(new Rectangle());
@@ -50,52 +55,28 @@ public class View extends JFrame {
         this.studentNameLabel = new JLabel(name);
         this.allClassesLabel = new JLabel(classes.toString());
 
-        this.textField = new JTextField(10);
 
 
         updateNameButton.addActionListener(e -> {
 
-                    textField.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            int value = Integer.parseInt(e.toString().trim());
-                            Message msg = new NewNameMessage(value);
-                            try {
-                                queue.put(msg);
-                                newGraph.repaint(new Rectangle(100, value));
-                            } catch (InterruptedException exception) {
-                                exception.printStackTrace();
-                            }
-                        }
-                    });
-                    textField2.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            int value2 = Integer.parseInt(e.toString().trim());
-                            Message msg2 = new NewNameMessage(value2);
-                            try {
-                                queue.put(msg2);
-                                newGraph.repaint(new Rectangle(100, value2));
-                            } catch (InterruptedException exception) {
-                                exception.printStackTrace();
-                            }
-                        }
-                    });
+                    String theNum = textField.getText().trim();
+                    String num2 = textField2.getText().trim();
+                    String num3 = textField3.getText().trim();
+                    printer = new JLabel("The Heights of the bars are: ");
+                    label = new JLabel("Green: " + theNum);
+                    label2 = new JLabel("Blue: " + num2);
+                    label3 = new JLabel("Red: " + num3);
+                    this.add(label);
+                    this.add(label2);
+                    this.add(label3);
+                    this.pack();
+            System.out.println(theNum);
+            System.out.println(num2);
+            System.out.println(num3);
 
-                    textField3.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            int value3 = Integer.parseInt(e.toString().trim());
-                            Message msg3 = new NewNameMessage(value3);
-                            try {
-                                queue.put(msg3);
-                                newGraph.repaint(new Rectangle(100, value3));
-                            } catch (InterruptedException exception) {
-                                exception.printStackTrace();
-                            }
-                        }
-                    });
+
                 });
+
 
         resetButton.addActionListener(new ActionListener() {
             @Override
